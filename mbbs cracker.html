@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crack MBBS Smarter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'amoled': '#000000',
+                        'amoled-light': '#121212',
+                        'neon-blue': '#00f2ff',
+                        'neon-blue-dark': '#00a8b5',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        glow: {
+                            '0%': { 'text-shadow': '0 0 5px rgba(0, 242, 255, 0.5)' },
+                            '100%': { 'text-shadow': '0 0 20px rgba(0, 242, 255, 0.8)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        
+        .glass {
+            background: rgba(18, 18, 18, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-light {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        
+        .input-field {
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            border-color: #00f2ff;
+            box-shadow: 0 0 0 3px rgba(0, 242, 255, 0.2);
+        }
+        
+        .glow-border {
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .glow-border:hover {
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.8);
+        }
+        
+        .post-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #00f2ff;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .animate-delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .animate-delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .animate-delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        .animate-delay-400 {
+            animation-delay: 0.4s;
+        }
+        
+        ::selection {
+            background-color: rgba(0, 242, 255, 0.3);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="glass fixed w-full z-50 py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white flex items-center">
+                <span class="text-neon-blue">Crack</span>MBBS
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="nav-link text-white hover:text-neon-blue transition">Home</a>
+                <a href="#" class="nav-link text-white hover:text-neon-blue transition">Articles</a>
+                <a href="#" class="nav-link text-white hover:text-neon-blue transition">Resources</a>
+                <a href="#" class="nav-link text-white hover:text-neon-blue transition">About</a>
+                <a href="#" class="nav-link text-white hover:text-neon-blue transition">Contact</a>
+            </div>
+            
+            <button class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="glass-light fixed inset-0 z-40 hidden flex-col items-center justify-center space-y-8">
+        <button class="absolute top-6 right-6 text-white text-2xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#" class="text-xl text-white hover:text-neon-blue transition">Home</a>
+        <a href="#" class="text-xl text-white hover:text-neon-blue transition">Articles</a>
+        <a href="#" class="text-xl text-white hover:text-neon-blue transition">Resources</a>
+        <a href="#" class="text-xl text-white hover:text-neon-blue transition">About</a>
+        <a href="#" class="text-xl text-white hover:text-neon-blue transition">Contact</a>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Hero Section -->
+            <section class="mb-20 text-center animate-fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-glow">
+                    Crack MBBS <span class="text-neon-blue">Smarter</span> 🧠
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+                    The ultimate resource hub for medical aspirants. Get curated study materials, expert tips, and proven strategies to ace your exams.
+                </p>
+            </section>
+            
+            <!-- Featured Posts -->
+            <section class="mb-20">
+                <h2 class="text-2xl md:text-3xl font-semibold mb-8 flex items-center">
+                    <span class="w-2 h-8 bg-neon-blue rounded-full mr-3"></span>
+                    Featured Articles
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Post 1 -->
+                    <div class="glass rounded-2xl overflow-hidden post-card animate-slide-up animate-delay-100">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                 alt="Anatomy study" 
+                                 class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <span class="absolute top-4 right-4 bg-neon-blue/90 text-amoled text-xs font-bold px-3 py-1 rounded-full">NEW</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-400 mb-2">
+                                <span>Anatomy</span>
+                                <span class="mx-2">•</span>
+                                <span>5 min read</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Mastering Human Anatomy in 30 Days</h3>
+                            <p class="text-gray-400 mb-4">A comprehensive guide to learning all major anatomical structures with memory techniques.</p>
+                            <a href="#" class="text-neon-blue font-medium flex items-center group">
+                                Read more
+                                <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 2 -->
+                    <div class="glass rounded-2xl overflow-hidden post-card animate-slide-up animate-delay-200">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1631815588090-4a8c0435aabc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                 alt="Pharmacology" 
+                                 class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-400 mb-2">
+                                <span>Pharmacology</span>
+                                <span class="mx-2">•</span>
+                                <span>8 min read</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Drug Classification Mnemonics</h3>
+                            <p class="text-gray-400 mb-4">Never forget drug classes again with these creative memory aids for medical students.</p>
+                            <a href="#" class="text-neon-blue font-medium flex items-center group">
+                                Read more
+                                <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 3 -->
+                    <div class="glass rounded-2xl overflow-hidden post-card animate-slide-up animate-delay-300">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1581595219315-a187dd40c322?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                 alt="Study schedule" 
+                                 class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <span class="absolute top-4 right-4 bg-neon-blue/90 text-amoled text-xs font-bold px-3 py-1 rounded-full">POPULAR</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-400 mb-2">
+                                <span>Study Tips</span>
+                                <span class="mx-2">•</span>
+                                <span>6 min read</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">The 90-Day MBBS Study Plan</h3>
+                            <p class="text-gray-400 mb-4">How to organize your study schedule for maximum retention and minimum burnout.</p>
+                            <a href="#" class="text-neon-blue font-medium flex items-center group">
+                                Read more
+                                <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-10 animate-fade-in animate-delay-400">
+                    <a href="#" class="inline-flex items-center px-6 py-3 bg-neon-blue/10 border border-neon-blue/30 text-neon-blue rounded-full font-medium hover:bg-neon-blue/20 transition-all glow-border">
+                        View All Articles
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </section>
+            
+            <!-- Submission Form -->
+            <section class="glass rounded-2xl p-8 mb-20 max-w-3xl mx-auto animate-slide-up">
+                <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-center">Share Your Knowledge</h2>
+                <p class="text-gray-400 mb-8 text-center">Contribute an article or study resource to help fellow medical students</p>
+                
+                <form class="space-y-6">
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-gray-300 mb-2">Article Title</label>
+                        <input type="text" id="title" class="input-field w-full px-4 py-3 bg-amoled-light border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-blue/50 text-white placeholder-gray-500 transition">
+                    </div>
+                    
+                    <div>
+                        <label for="category" class="block text-sm font-medium text-gray-300 mb-2">Category</label>
+                        <select id="category" class="input-field w-full px-4 py-3 bg-amoled-light border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-blue/50 text-white appearance-none">
+                            <option>Anatomy</option>
+                            <option>Physiology</option>
+                            <option>Biochemistry</option>
+                            <option>Pharmacology</option>
+                            <option>Pathology</option>
+                            <option>Study Tips</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="content" class="block text-sm font-medium text-gray-300 mb-2">Content</label>
+                        <textarea id="content" rows="6" class="input-field w-full px-4 py-3 bg-amoled-light border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-blue/50 text-white placeholder-gray-500 transition"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="image" class="block text-sm font-medium text-gray-300 mb-2">Featured Image</label>
+                        <div class="flex items-center justify-center w-full">
+                            <label for="image" class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-700 rounded-xl cursor-pointer bg-amoled-light hover:border-neon-blue transition">
+                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <i class="fas fa-cloud-upload-alt text-2xl text-gray-500 mb-2"></i>
+                                    <p class="text-sm text-gray-500">Click to upload or drag and drop</p>
+                                </div>
+                                <input id="image" type="file" class="hidden" />
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-4">
+                        <button type="submit" class="w-full py-3 px-4 bg-neon-blue text-amoled font-medium rounded-xl hover:bg-neon-blue-dark transition flex items-center justify-center">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Submit Article
+                        </button>
+                    </div>
+                </form>
+            </section>
+            
+            <!-- Newsletter -->
+            <section class="glass rounded-2xl p-8 mb-20 max-w-3xl mx-auto animate-fade-in">
+                <div class="text-center">
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-3">Stay Updated</h2>
+                    <p class="text-gray-400 mb-6 max-w-2xl mx-auto">Get the latest study resources, articles, and exam tips delivered to your inbox weekly.</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                        <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 bg-amoled-light border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-blue/50 text-white placeholder-gray-500 transition">
+                        <button class="px-6 py-3 bg-neon-blue text-amoled font-medium rounded-xl hover:bg-neon-blue-dark transition whitespace-nowrap">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="glass-light py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <a href="#" class="text-2xl font-bold text-white flex items-center mb-4">
+                        <span class="text-neon-blue">Crack</span>MBBS
+                    </a>
+                    <p class="text-gray-400">The smart way to prepare for medical entrance exams and MBBS studies.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-neon-blue transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-neon-blue transition">Articles</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-neon-blue transition">Resources</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-neon-blue transition">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-neon-blue transition">Anatomy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-neon-blue transition">Physiology</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-neon-blue transition">Biochemistry</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-neon-blue transition">Pharmacology</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-amoled-light flex items-center justify-center text-gray-400 hover:text-neon-blue hover:bg-neon-blue/10 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-amoled-light flex items-center justify-center text-gray-400 hover:text-neon-blue hover:bg-neon-blue/10 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-amoled-light flex items-center justify-center text-gray-400 hover:text-neon-blue hover:bg-neon-blue/10 transition">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-amoled-light flex items-center justify-center text-gray-400 hover:text-neon-blue hover:bg-neon-blue/10 transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2023 CrackMBBS. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-neon-blue transition text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-neon-blue transition text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-neon-blue transition text-sm">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.md\\:hidden');
+        const mobileMenu = document.querySelector('.glass-light.fixed');
+        const mobileMenuClose = mobileMenu.querySelector('button');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add animation classes when elements come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
